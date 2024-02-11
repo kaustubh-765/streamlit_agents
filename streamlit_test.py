@@ -1,8 +1,7 @@
 import streamlit as st
 from langchain_openai import ChatOpenAI
 from langchain_core.output_parsers import StrOutputParser
-import os 
-from dotenv import load_dotenv
+import os
 from coding_problem_generator import Assessment
 from unit_test_cases_dataset import data
 
