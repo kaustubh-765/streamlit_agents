@@ -1,0 +1,13 @@
+langchain==0.1.1
+langchain-community==0.0.13
+langchain-core==0.1.12
+langchain-openai==0.0.2.post1
+langsmith @ file:///home/conda/feedstock_root/build_artifacts/langsmith_1705027969384/work
+libarchive-c @ file:///tmp/build/80754af9/python-libarchive-c_1617780486945/work
+libmambapy @ file:///C:/b/abs_1dshymu5qt/croot/mamba-split_1680096516212/work/libmambapy
+lxml @ file:///C:/b/abs_c2bg6ck92l/croot/lxml_1679646459966/work
+openai==1.7.0
+openapi-schema-pydantic @ file:///home/conda/feedstock_root/build_artifacts/openapi-schema-pydantic_1681130872959/work
+streamlit==1.31.0
+
+
