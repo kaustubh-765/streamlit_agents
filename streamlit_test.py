@@ -57,13 +57,13 @@ def main():
 
     # Create a sidebar as a navigation bar
     st.sidebar.title("Navigation")
-    selection = st.sidebar.radio("Go to", ["Home", "Page 1", "Page 2"])
+    selection = st.sidebar.radio("Go to", ["Home", "Coding Assessment", "MCQ Assessment"])
 
     if selection == "Home":
         st.write("Welcome to the app")
-    elif selection == "Page 1":
+    elif selection == "Coding Assessment":
         page1()
-    elif selection == "Page 2":
+    elif selection == "MCQ Assessment":
         page2()
 
 if __name__ == "__main__":
