@@ -6,11 +6,6 @@ from dotenv import load_dotenv
 from coding_problem_generator import Assessment
 from unit_test_cases_dataset import data
 
-def my_function(param1, param2):
-    # function logic here
-    response = param1 + param2
-    return response
-
 st.title("Testing Assesment Generator")
 
 param1 = st.text_input("Enter Language")
@@ -18,8 +13,6 @@ param2 = st.text_input("Enter difficulty level")
 
 option = st.selectbox('Select an option', (0, 1, 2, 3, 4, 5))
 st.text(data[option])
-
-load_dotenv()
 
 llm = ChatOpenAI(
     model = "gpt-3.5-turbo",
