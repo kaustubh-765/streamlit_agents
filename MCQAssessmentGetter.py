@@ -38,17 +38,3 @@ class MCQAssessmentGetter:
 
         return response
     
-
-# if __name__ == "__main__":
-
-#     query = "list comprehension in python"
-#     parameter = AssessmentPromptParameter(
-#         language_type="Python",
-#         question_level="Easy",
-#         summary="",
-#         topic=query
-#     )
-
-#     mcq = MCQAssessmentGetter(parameter=parameter)
-#     content = mcq.get_mcq_assessment()
-#     print(content)

@@ -3,7 +3,6 @@ from langchain.memory import ConversationBufferMemory
 from langchain.chains import LLMChain
 from langchain_core.output_parsers import StrOutputParser
 import os
-from dotenv import load_dotenv
 
 class ChainFactory:
 
@@ -16,7 +15,6 @@ class ChainFactory:
             memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True),
             human_input = ""
         ):
-        load_dotenv()
 
         self.prompt = prompt
         self.output_transformer = output_transformer

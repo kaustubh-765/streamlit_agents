@@ -40,17 +40,3 @@ class CodeAssessmentGetter:
 
         return response
     
-
-# if __name__ == "__main__":
-
-#     query = "list comprehension in python"
-#     parameter = AssessmentPromptParameter(
-#         language_type="Python",
-#         question_level="Easy",
-#         summary="",
-#         topic=query
-#     )
-
-#     code = CodeAssessmentGetter(parameter=parameter)
-#     content = code.get_code_assessment()
-#     print(content)
