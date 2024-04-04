@@ -26,7 +26,7 @@ def input_fields():
     st.title("Testing MCQ Assesment Generator")
 
     language_type = st.text_input("Enter Language")
-    difficulty_level = st.radio("Reset Memory", ["Easy", "Medium", "Hard"])
+    difficulty_level = st.radio("Difficult Level", ["Easy", "Medium", "Hard"])
     topic = st.text_input("Enter the topic")
     summary = st.text_input("Enter the summary")
     temperature = st.slider("Enter the temperature for the LLM", 0.0, 1.0, 0.7)
