@@ -14,7 +14,7 @@ from langchain.memory import ConversationBufferMemory
 
 class MCQAssessmentGetter:
     """Class to generate MCQ questions for the problem"""
-    def __init__(self, temperature ,parameter: AssessmentPromptParameter, memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)) -> None:
+    def __init__(self, temperature , parameter: AssessmentPromptParameter, memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)) -> None:
         """
             Initialize the prompt to be used and the chain 
 
@@ -38,3 +38,17 @@ class MCQAssessmentGetter:
 
         return response
     
+
+# if __name__ == "__main__":
+
+#     query = "list comprehension in python"
+#     parameter = AssessmentPromptParameter(
+#         language_type="Python",
+#         question_level="Easy",
+#         summary="",
+#         topic=query
+#     )
+
+#     mcq = MCQAssessmentGetter(parameter=parameter)
+#     content = mcq.get_mcq_assessment()
+#     print(content)

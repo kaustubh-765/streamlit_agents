@@ -1,6 +1,7 @@
 import sys
 import warnings
 from os.path import dirname, abspath
+import json
 
 current_dir = dirname(abspath(__file__))
 parent_dir = dirname(current_dir)
@@ -19,7 +20,6 @@ class CodeAssessmentGetter:
             Initialize the prompt to be used and the chain 
 
             Args:
-                temperature(float): Temperature
                 parameter(AssessmentPromptParameter): Prompt parameters
                 memory(ConversationBufferMemory): ConversationBufferMemory 
 
@@ -35,8 +35,23 @@ class CodeAssessmentGetter:
         """
 
         response = self.chain.initialize_agent()
-        transform = OutputTransformer(response)
+        response = json.loads(response)
+        transform = OutputTransformer(json.dumps(response))
         response = transform.transform()
 
         return response
     
+
+# if __name__ == "__main__":
+
+#     query = "list comprehension in python"
+#     parameter = AssessmentPromptParameter(
+#         language_type="Python",
+#         question_level="Easy",
+#         summary="",
+#         topic=query
+#     )
+
+#     code = CodeAssessmentGetter(parameter=parameter)
+#     content = code.get_code_assessment()
+#     print(content)
