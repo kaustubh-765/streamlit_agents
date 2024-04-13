@@ -66,9 +66,15 @@ def run_component():
         }
 
             
-        json_content = json.loads(content)
-        json_content["data"].extend(content_type["data"])
-        content = json.dumps(json_content, indent=4) 
+        content = [
+        json.dumps(
+            {**json.loads(content[i]), "data": json.loads(content[i])["data"] + content_type["data"]},
+            indent=4
+        )
+        for i in range(len(content))
+        ]
+
+        content = {"output":content}
 
         st.json(content)
 
