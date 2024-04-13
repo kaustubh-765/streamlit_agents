@@ -21,7 +21,7 @@ if 'memory' not in st.session_state:
 
 def input_fields():
     
-    global mcq_assessment_memory, language_type, difficulty_level, topic, summary, temperature, reset_memory
+    global mcq_assessment_memory, language_type, difficulty_level, topic, summary, temperature, reset_memory, count
 
     st.title("Testing MCQ Assesment Generator")
 
@@ -30,13 +30,14 @@ def input_fields():
     topic = st.text_input("Enter the topic")
     summary = st.text_input("Enter the summary")
     temperature = st.slider("Enter the temperature for the LLM", 0.0, 1.0, 0.7)
+    count = st.text_input("Enter the number of questions to generate")
 
     reset_memory = st.radio("Reset Memory", ["true", "false"])
 
 
 def run_component():
     
-    global mcq_assessment_memory, language_type, difficulty_level, topic, summary, temperature, reset_memory
+    global mcq_assessment_memory, language_type, difficulty_level, topic, summary, temperature, reset_memory, count
 
     if st.button("Submit"):
 
@@ -48,7 +49,8 @@ def run_component():
             language_type=language_type,
             question_level=difficulty_level,
             topic=topic,
-            summary=summary
+            summary=summary,
+            count = count
         )
 
         mcq = MCQAssessmentGetter(parameter=prompt_parameter,  memory = st.session_state['memory'], temperature=float(temperature))

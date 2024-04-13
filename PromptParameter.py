@@ -35,3 +35,4 @@ class AssessmentPromptParameter(BaseModel):
     question_level : str
     topic: str
     summary: str
+    count: int = 3

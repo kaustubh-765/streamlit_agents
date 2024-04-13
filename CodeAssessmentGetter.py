@@ -1,7 +1,7 @@
 import sys
+import json
 import warnings
 from os.path import dirname, abspath
-import json
 
 current_dir = dirname(abspath(__file__))
 parent_dir = dirname(current_dir)
@@ -20,6 +20,7 @@ class CodeAssessmentGetter:
             Initialize the prompt to be used and the chain 
 
             Args:
+                temperature(float): Temperature
                 parameter(AssessmentPromptParameter): Prompt parameters
                 memory(ConversationBufferMemory): ConversationBufferMemory 
 
@@ -35,12 +36,9 @@ class CodeAssessmentGetter:
         """
 
         response = self.chain.initialize_agent()
-        response = json.loads(response)
-        transform = OutputTransformer(json.dumps(response))
-        response = transform.transform()
-
-        return response
-    
+        problems = json.loads(response)["problems"]
+        problems = [json.dumps(problem) for problem in problems]
+        return [OutputTransformer(problem).transform() for problem in problems]
 
 # if __name__ == "__main__":
 
@@ -52,6 +50,6 @@ class CodeAssessmentGetter:
 #         topic=query
 #     )
 
-#     code = CodeAssessmentGetter(parameter=parameter)
-#     content = code.get_code_assessment()
+#     mcq = CodeAssessmentGetter(parameter=parameter, temperature=0.7, memory=ConversationBufferMemory(memory_key="chat_history"))
+#     content = mcq.get_code_assessment()
 #     print(content)

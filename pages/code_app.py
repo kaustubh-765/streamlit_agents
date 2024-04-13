@@ -12,7 +12,7 @@ from CodeAssessmentGetter import CodeAssessmentGetter
 from PromptParameter import AssessmentPromptParameter
 from langchain.memory import ConversationBufferMemory
 
-global  language_type, difficulty_level, topic, summary, temperature, reset_memory
+global  language_type, difficulty_level, topic, summary, temperature, reset_memory, count
 
 code_assessment_memory = ConversationBufferMemory(memory_key='chat_history', return_messages=True)
 
@@ -21,7 +21,7 @@ if 'memory' not in st.session_state:
 
 def input_fields():
     
-    global language_type, difficulty_level, topic, summary, temperature, reset_memory
+    global language_type, difficulty_level, topic, summary, temperature, reset_memory, count 
 
     st.title("Testing Code Assesment Generator")
 
@@ -30,13 +30,14 @@ def input_fields():
     topic = st.text_input("Enter the topic")
     summary = st.text_input("Enter the summary")
     temperature = st.slider("Enter the temperature for the LLM", 0.0, 1.0, 0.7)
+    count = st.text_input("Enter the number of questions to generate")
 
     reset_memory = st.radio("Reset Memory", ["true", "false"])
 
 
 def run_component():
     
-    global language_type, difficulty_level, topic, summary, temperature, reset_memory
+    global language_type, difficulty_level, topic, summary, temperature, reset_memory, count
 
     if st.button("Submit"):
 
@@ -48,7 +49,8 @@ def run_component():
             language_type=language_type,
             question_level=difficulty_level,
             topic=topic,
-            summary=summary
+            summary=summary, 
+            count = count
         )
 
         mcq = CodeAssessmentGetter(parameter=prompt_parameter,  memory = st.session_state['memory'], temperature=float(temperature))

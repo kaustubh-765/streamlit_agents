@@ -177,29 +177,20 @@ class PromptFactory:
 
     def generate_mcq_assessmemt_prompt(self):
         prompt = f"""
-You are a professor of {self.prompt_parameter.topic}, and you are responsible for generating unique Easy, Medium ,or Hard level multiple choice problems, level will be mentioned below.
+You are a professor of {self.prompt_parameter.language_type}, and you are responsible for generating {self.prompt_parameter.count} unique MCQ problems applicable to language/framework mentioned below based on the topics provided from the textbook. The problem should be independent and solvable on it's own. The programs should be able to test the understanding of the candidate on these topics. Try to create real world problems that can be solved using the concepts of the topics mentioned below.
 
-Generate a multiple choice questions applicable to language/framework mentioned below.
-The Task should be independent and solvable on it's own. 
+Language: {self.prompt_parameter.language_type}
+Level: {self.prompt_parameter.question_level}
+Topics:  {self.prompt_parameter.topic}
+Summary: {self.prompt_parameter.summary}
 
-language: {self.prompt_parameter.language_type}
-level: {self.prompt_parameter.question_level}
-
-Also, find attach the summary of the topic, and generate questions with context to the topic title and the summary provided below, you can also use your knowledge base to generate unique questions. 
-
-summary: {self.prompt_parameter.summary}
-
-The structure of the response should be of the form: 
-
-task: This should be the question that we have to answer by choosing one of the four options. Since MCQs are simpler, these questions can be theoretical concepts or one-liner coding 'what is the output' questions.
-Make sure you provide a variety of questions.
-
+The structure of the each response should be of the form:
+task: This should be the question that we have to answer by choosing one of the four options. Since MCQs are simpler, these questions can be theoretical concepts or one-liner coding 'what is the output' questions. Make sure you provide a variety of questions.
 multiple_choice: We need 4 options here. This should contain the dictionary where each key is a, b, c, d and has the possible answers where out of all only one is correct.
-
 correct_answer: This should contain the correct answer's key out of the provided possible answers in the above tag.
 
-The above list of headings, should be the format of the response. Generate the JSON response where each heading is the key and their required output is the content in the JSON file.
-Make sure you always provide a JSON-like structure for the chapters."""
+The above list of headings, should be the format of the response. Generate the JSON response where each heading is the key and their required output is the content in the JSON file with problems as a list in the JSON file inside the key "problems". Make sure you always provide a JSON-like structure for the each questions.
+"""
                     
         prompt = prompt + """
                 {chat_history}
@@ -214,16 +205,16 @@ Make sure you always provide a JSON-like structure for the chapters."""
     
     def generate_code_assessmemt_prompt(self):
         prompt = f"""
-You are a professor of {self.prompt_parameter.language_type}, and you are responsible for generating unique competitive coding problems applicable to language/framework mentioned below based on the topics provided from the textbook. The problem should be independent and solvable on it's own. The programs should be able to test the understanding of the candidate on these topics. Try to create real world problems that can be solved using the concepts of the topics mentioned below.
+You are a professor of {self.prompt_parameter.language_type}, and you are responsible for generating {self.prompt_parameter.count} unique competitive coding problems applicable to language/framework mentioned below based on the topics provided from the textbook. The problem should be independent and solvable on it's own. The programs should be able to test the understanding of the candidate on these topics. Try to create real world problems that can be solved using the concepts of the topics mentioned below.
 
 Language: {self.prompt_parameter.language_type}
 Level: {self.prompt_parameter.question_level}
-Topics: {self.prompt_parameter.topic}
+Topics: {self.prompt_parameter.topic} 
 Summary: {self.prompt_parameter.summary}
 
-The structure of the response should be of the form:
+The structure of the each response should be of the form:
 
-task: This should contain the problem statement, and should be a detailed explanation of the requirement of the programming problem.
+Task: This should contain the problem statement, and should be a detailed explanation of the requirement of the programming problem.
 function_signature: The response should also consist of function signature in which the user will do the implementation.
 examples: The Examples should contain following headings: ['Input', 'Output', 'Explanation'].
 constraints: The response should also consist the set of constraints applicable on the problem.
@@ -231,9 +222,7 @@ sample_solution: Provide a working solution for the generated problem that follo
 incomplete_solution: Provide a partially working solution for the generated problem that contains logical errors, bugs, or missing part to be filled in comments. The solution should be implemented in the specified language/framework. 
 unit_tests: Generate five unit tests for the generated problem in the {self.prompt_parameter.language_type} programming language using tesing techniques from the language. These tests should ensure correctness and reliability of the solution The unit tests generation should contain one single function in the language under the heading. The tests should be parameterised so that the user's solution can be tested against multiple test cases.
 
-The above list of headings, should be the format of the response. Generate the JSON response where each heading is the key and their required output is the content in the JSON file. Make sure you always provide a JSON-like structure for the chapters.
-You have already generated these problems in previous examinations, you should not repeat the same problems again. You can generate new problems or extremely different variations of these based on the topics mentioned above.
-                """
+The above list of headings, should be the format of the response. Generate the JSON response where each heading is the key and their required output is the content in the JSON file with problems as a list in the JSON file inside the key "problems". Make sure you always provide a JSON-like structure for the each questions.                """
                     
         prompt = prompt + """
                 {chat_history}

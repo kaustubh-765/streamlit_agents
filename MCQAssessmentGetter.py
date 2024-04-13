@@ -1,4 +1,5 @@
 import sys
+import json
 import warnings
 from os.path import dirname, abspath
 
@@ -14,7 +15,7 @@ from langchain.memory import ConversationBufferMemory
 
 class MCQAssessmentGetter:
     """Class to generate MCQ questions for the problem"""
-    def __init__(self, temperature , parameter: AssessmentPromptParameter, memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)) -> None:
+    def __init__(self, temperature ,parameter: AssessmentPromptParameter, memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)) -> None:
         """
             Initialize the prompt to be used and the chain 
 
@@ -33,11 +34,9 @@ class MCQAssessmentGetter:
         """
 
         response = self.chain.initialize_agent()
-        transform = OutputTransformer(response)
-        response = transform.transform()
-
-        return response
-    
+        problems = json.loads(response)["problems"]
+        problems = [json.dumps(problem) for problem in problems]
+        return [OutputTransformer(problem).transform() for problem in problems]
 
 # if __name__ == "__main__":
 
@@ -49,6 +48,6 @@ class MCQAssessmentGetter:
 #         topic=query
 #     )
 
-#     mcq = MCQAssessmentGetter(parameter=parameter)
+#     mcq = MCQAssessmentGetter(parameter=parameter, temperature=0.7, memory=ConversationBufferMemory(memory_key="chat_history"))
 #     content = mcq.get_mcq_assessment()
 #     print(content)
