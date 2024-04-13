@@ -50,7 +50,7 @@ def run_component():
             question_level=difficulty_level,
             topic=topic,
             summary=summary, 
-            count = count
+            count = int(count)
         )
 
         mcq = CodeAssessmentGetter(parameter=prompt_parameter,  memory = st.session_state['memory'], temperature=float(temperature))
